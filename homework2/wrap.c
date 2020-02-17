@@ -16,7 +16,7 @@
 
 int main (int argc, char **argv)
 {
-	unsigned int i = 1;
+	unsigned int i = 1;	
 	unsigned int sum;
 	
 	if (argc < 2)
