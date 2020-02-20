@@ -27,16 +27,19 @@ int main (int argc, char **argv)
 
 	sum = atoi(argv[1]);
 
+
 	printf ("sum           : %u\n", sum);
 
-	printf ("overflow test : (sum + %u > UINT_MAX) : ", i);
+	printf ("overflow test : (sum + %u > UINT_MAX + %u) : ", i);
 
-	if (sum + i > UINT_MAX)
+	if (sum + i >= UINT_MAX) //CHANGED: Now the program checks if UINT_MAX if greater then or equal to sum + i
 	{
 		printf ("overflow : sum + %u : %u\n", i, sum + i);
 	}
-	else 
+	else
 	{
 		printf ("NO overflow : sum + %u : %u\n", i, sum + i);
+		
 	}
+
 }
