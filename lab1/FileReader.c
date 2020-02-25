@@ -1,15 +1,14 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
-
-char* ReadLine(FILE *file, char output[]);
+#include <time.h>
 
 int main(int argc, char** argv){
 
 	FILE *file;	
 	char* input = argv[1];
-	char output[1000];
-	char* fileText[100];
-	
+	char fileText[100][1000];
+
 	file = fopen(input, "r");
 
 	if (file == NULL)
@@ -17,32 +16,25 @@ int main(int argc, char** argv){
 		printf("Could not open file %s", input);
 		return 1;
 	}
-
 	else
-	{	for(int i = 0; ReadLine(file, output) != NULL ;i++)
+	{	
+		for(int i = 0; i < 100; i++)
 		{
-			fileText[i] = ReadLine(file, output);
+			fgets(fileText[i], 1000, file);
+
+			if (fileText[i] == NULL)
+			{
+				fileText[i][1000] = '\0';
+				break;
+			}
+
 		}
+
+		srand(time(NULL));		
+		printf("%s", fileText[rand() % 8]);
 	}
 
-	return 0;
-
-
-}
-
-char* ReadLine(FILE *file, char output[])
-{
-
-	if (fgets(output, 1000, file) != NULL)
-	{	output[999] = '\0';
-		printf("%s", output);
 	
-	}
-	else
-	{
-		output = NULL;
-		fclose(file);
-	}
 
-	return output;
 }
+
